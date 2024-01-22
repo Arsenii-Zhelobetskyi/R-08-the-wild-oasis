@@ -10,3 +10,5 @@ Currently, two official plugins are available:
 styled-components;
 declarative react-router
 react-icons
+supabase;
+react query;
