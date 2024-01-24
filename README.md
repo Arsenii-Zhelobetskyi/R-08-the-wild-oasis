@@ -12,3 +12,6 @@ declarative react-router
 react-icons
 supabase;
 react query;
+date-fns
+react-hot-toast
+react-hook-form
