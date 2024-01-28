@@ -1,4 +1,8 @@
+import { cloneElement, createContext, useContext, useState } from "react";
+import { createPortal } from "react-dom";
+import { HiXMark } from "react-icons/hi2";
 import styled from "styled-components";
+import useClickOutside from "../hooks/useClickOutside";
 
 const StyledModal = styled.div`
   position: fixed;
@@ -48,3 +52,56 @@ const Button = styled.button`
     color: var(--color-grey-500);
   }
 `;
+
+const ModalContext = createContext();
+function Modal({ children }) {
+  const [openName, setOpenName] = useState("");
+  const close = () => setOpenName("");
+  const open = (name) => setOpenName(name);
+  return (
+    <ModalContext.Provider value={{ openName, close, open }}>
+      {children}
+    </ModalContext.Provider>
+  );
+}
+
+function Open({ children, opens: opensWindowName }) {
+  const { open } = useContext(ModalContext);
+  return cloneElement(children, { onClick: () => open(opensWindowName) }); //cloneElement is a function that takes a React element and returns a new React element with the same type and props.
+}
+
+function Window({ children, name }) {
+  const { openName, close } = useContext(ModalContext);
+  const { ref } = useClickOutside(close);
+  // const ref = useRef();
+  // useEffect(() => {
+  //   function handleClick(e) {
+  //     if (ref.current && !ref.current.contains(e.target)) close();
+  //   }
+  //   document.addEventListener("click", handleClick, true); // true is necessary, because
+  //   // otherwise the event will be handled in the bubbling phase,
+  //   //  and not in the capturing phase.  Without it the event will not let us to open modal window again.
+  //   // in capturing phase it will simply travel to the element that clicked, while in bubbling phase it will check all element up and break our logic.
+  //   return () => {
+  //     document.removeEventListener("click", handleClick, true);
+  //   };
+  // }, [close]);
+
+  if (name !== openName) return null;
+  return createPortal(
+    <Overlay>
+      <StyledModal ref={ref}>
+        <Button onClick={close}>
+          <HiXMark />
+        </Button>
+        <div>{cloneElement(children, { onCloseModal: close })}</div>
+      </StyledModal>
+    </Overlay>,
+    document.body
+  );
+  // document.querySelector("#modal-root").. other ways works too
+}
+Modal.Open = Open;
+Modal.Window = Window;
+
+export default Modal;

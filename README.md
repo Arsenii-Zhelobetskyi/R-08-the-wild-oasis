@@ -15,3 +15,4 @@ react query;
 date-fns
 react-hot-toast
 react-hook-form
+compound component
