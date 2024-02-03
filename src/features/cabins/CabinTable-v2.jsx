@@ -26,8 +26,8 @@ const TableHeader = styled.header`
   padding: 1.6rem 2.4rem;
 `;
 function CabinTable() {
-  const { isLoading, cabins } = useCabins();
-  if (isLoading) return <Spinner />;
+  const { isPending, cabins } = useCabins();
+  if (isPending) return <Spinner />;
   return (
     <Table role="table">
       <TableHeader role="row">

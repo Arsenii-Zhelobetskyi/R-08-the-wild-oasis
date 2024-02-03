@@ -7,7 +7,7 @@ import Spinner from "../../ui/Spinner";
 import { useUpdateSetting } from "./useUpdateSetting";
 function UpdateSettingsForm() {
   const {
-    isLoading,
+    isPending,
     settings: {
       minBookingLength,
       maxBookingLength,
@@ -23,7 +23,7 @@ function UpdateSettingsForm() {
     updateSetting({ [name]: value });
   }
 
-  if (isLoading) return <Spinner />;
+  if (isPending) return <Spinner />;
   return (
     <Form>
       <FormRow label="Minimum nights/booking">
