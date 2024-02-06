@@ -10,7 +10,6 @@ import Menus from "../../ui/Menus";
 import {
   HiArrowDownOnSquare,
   HiArrowUpOnSquare,
-  HiBarsArrowUp,
   HiEye,
   HiTrash,
 } from "react-icons/hi2";
