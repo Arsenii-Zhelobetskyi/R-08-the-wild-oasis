@@ -4,7 +4,7 @@
 <h3 align="center" >⚛️This is  main project that was created during the Jonas Schmedtmann react course⚛️</h3>
 
 ## ▶️Demonstration:
-<img src="./public/fast-react-pizza.gif" />
+<img src="./public/the-wild-oasis.gif" />
 
 ## 🚀 This app is example of:
 - 💅 How to use "styled-components"
